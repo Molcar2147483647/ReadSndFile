@@ -83,6 +83,53 @@ snd.GetSoundDataIndex(0); // 0番目のデータを取得
 戻り値1 対象が存在する GetSoundDataIndex(index)のデータ  
 戻り値2 対象が存在しない SNDConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
+### SNDデータのサウンドグループ数を取得
+読み込んだSNDデータのサウンドグループ数を返します  
+```
+air.NumGroup(); // サウンドグループ数を取得
+```
+戻り値 int32_t NumGroup サウンドグループ数  
+
+### SNDデータのサウンド数を取得
+読み込んだSNDデータのサウンド数を返します  
+```
+air.NumItem(); // サウンド数を取得
+```
+戻り値 int32_t NumItem サウンド数  
+
+### SNDデータのファイル名を取得
+読み込んだSNDデータの拡張子を除いたファイル名を返します  
+```
+air.FileName(); // ファイル名を取得
+```
+戻り値 const std::string& FileName ファイル名  
+
+### SNDデータの初期化
+読み込んだSNDデータを初期化します  
+```
+air.clear(); // SNDデータの初期化
+```
+戻り値 なし(void)  
+
+### SNDデータの存在確認
+読み込んだSNDデータの空かを判定します  
+```
+air.empty(); // SNDデータの存在確認
+```
+戻り値 bool 判定結果 (false = データが空：true = データが存在)  
+
+### SNDデータのデータサイズを取得
+読み込んだSNDデータのデータサイズを返します  
+```
+air.size(); // SNDデータサイズを取得
+```
+戻り値 size_t SNDDataSize SNDデータサイズ 
+
+
+
+
+
+
 
 
 ## 使用例
