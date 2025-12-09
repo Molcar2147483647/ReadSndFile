@@ -121,7 +121,7 @@ snd.empty(); // SNDデータの存在確認
 ### SNDデータのデータサイズを取得
 読み込んだSNDデータのデータサイズを返します  
 ```
-air.size(); // SNDデータサイズを取得
+snd.size(); // SNDデータサイズを取得
 ```
 戻り値 size_t SNDDataSize SNDデータサイズ 
 
@@ -383,7 +383,7 @@ int main()
 	SAELib::SNDConfig::SetSNDSearchPath("../../");	// sndファイルの検索開始階層を指定
 
 	// kfmのsndファイルを読み込む
-	SAELib::SND snd("M16_Boss");
+	SAELib::SND snd("kfm");
 
 	// サウンド番号5-0が存在するか確認
 	if (snd.ExistSoundNumber(5, 0)) {
