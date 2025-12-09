@@ -125,12 +125,249 @@ air.size(); // SNDデータサイズを取得
 ```
 戻り値 size_t SNDDataSize SNDデータサイズ 
 
+## class SAELib::SND::SoundData
+### ダミーデータ判断
+自身がダミーデータであるかを確認します
+SNDConfig::SetThrowError の設定が OFF の場合にエラー回避のために使用されます
+```
+snd.GetSoundData(XXX).IsDummy(); // ダミーデータ判断
+```
+戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ)
 
+### グループ番号の取得
+対象音声のグループ番号を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).GroupNo(); // グループ番号を取得
+```
+戻り値 int32_t GroupNo グループ番号
 
+### アイテム番号の取得
+対象音声のアイテム番号を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).ItemNo(); // アイテム番号を取得
+```
+戻り値 int32_t ItemNo アイテム番号
 
+### バイトサイズの取得
+対象音声データのバイトサイズを返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).ByteSize(); // バイトサイズを取得
+```
+戻り値 int32_t ByteSize バイトサイズ
 
+### チャンネル数の取得
+対象音声のチャンネル数を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).Channel(); // チャンネル数を取得
+```
+戻り値 int32_t Channel チャンネル数
 
+### ヘルツの取得
+対象音声のヘルツを返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).Hz(); // ヘルツを取得
+```
+戻り値 int32_t Hz ヘルツ
 
+### ビット数の取得
+対象音声のビット数を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).Bit(); // ビット数を取得
+```
+戻り値 int32_t Bit ビット数
+
+### サンプル秒数の取得
+対象音声のサンプル秒数を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).SampleRate(); // サンプル秒数を取得
+```
+戻り値 double SampleRate サンプル秒数
+
+### フレーム秒数の取得
+対象音声のフレーム秒数を返します
+ダミーデータの場合は 0 を返します
+```
+snd.GetSoundData(XXX).SampleFrame(); // フレーム秒数を取得
+```
+戻り値 double SampleFrame フレーム秒数
+
+### コメントデータの取得
+SAEで設定された対象音声コメントを返します
+ダミーデータの場合は DummyBinaryData を返します
+DummyBinaryData は常に長さ 1 の配列で内容は `{0}` です
+```
+snd.GetSoundData(XXX).Comment(); // コメントデータを取得
+```
+戻り値1 const unsigned char* const Comment コメントデータ配列
+戻り値2 const unsigned char* const DummyBinaryData ダミーデータ配列
+
+## class SAELib::SNDConfig
+### エラー出力切り替え設定/取得
+このライブラリ関数で発生したエラーを例外として投げるかログとして記録するかを指定できます  
+```
+SAELib::SNDConfig::SetThrowError(bool flag); // エラー出力切り替え設定
+```
+引数1 bool (false = ログとして記録する：true = 例外を投げる)  
+戻り値 なし(void)  
+```
+SAELib::SNDConfig::GetThrowError(); // エラー出力切り替え設定を取得
+```
+戻り値 bool (false = ログとして記録する：true = 例外を投げる)
+
+### エラーログファイルを作成設定/取得
+このライブラリ関数で発生したエラーのログファイルを出力するかどうか指定できます  
+```
+SAELib::SNDConfig::SetCreateLogFile(bool flag); // エラーログファイルを作成設定
+```
+引数1 bool (false = ログファイルを出力しない：true = ログファイルを出力する)  
+戻り値 なし(void)  
+```
+SAELib::SNDConfig::GetCreateLogFile(); // エラーログファイルを作成設定を取得  
+```
+戻り値 bool (false = ログファイルを出力しない：true = ログファイルを出力する)    
+
+### SAELibフォルダを作成設定/取得
+ファイルの出力先としてSAELibファイルを使用するかを指定できます  
+```
+SAELib::SNDConfig::SetCreateSAELibFile(bool flag, const std::string& Path = ""); // SAELibフォルダを作成設定
+```
+引数1 bool (false = SAELibファイルを使用しない：true = SAELibファイルを使用する)  
+引数2 const std::string& SAELibフォルダ作成先(省略時はパスの設定なし)  
+戻り値 なし(void)  
+```
+SAELib::SNDConfig::GetCreateSAELibFile(); // SAELibフォルダを作成設定を取得  
+```
+戻り値 const std::string& CreateSAELibFile SAELibフォルダ作成先  
+
+### SAELibフォルダのパス設定/取得
+SAELibファイルの作成パスを指定できます  
+```
+SAELib::SNDConfig::SetSAELibFilePath(const std::string& Path = ""); // SAELibフォルダのパス設定
+```
+引数1 const std::string& SAELibFilePath SAELibフォルダ作成先  
+戻り値 なし(void)  
+```
+SAELib::SNDConfig::GetSAELibFilePath(); // SAELibフォルダを作成パス取得  
+```
+戻り値 const std::string& SAELibFilePath SAELibフォルダ作成先  
+
+### SNDファイルの検索パス設定/取得
+SNDファイルの検索先のパスを指定できます  
+SNDコンストラクタもしくはLoadSND関数で検索先のパスを指定しない場合、この設定のパスで検索します  
+```
+SAELib::SNDConfig::SetSNDSearchPath(const std::string& Path = ""); // SNDファイルの検索パス設定  
+```
+引数1 const std::string& SNDSearchPath SNDファイルの検索先のパス  
+戻り値 なし(void)  
+```
+SAELib::SNDConfig::GetSNDSearchPath(); // SNDファイルの検索パス取得  
+```
+戻り値 const std::string& SNDSearchPath SNDファイルの検索先のパス  
+
+## namespace SAELib::SNDError
+### エラーID情報  
+このライブラリが出力するエラーIDのenumです  
+```
+enum ErrorID : int32_t {
+	NotFound_SNDFile,
+	NotFound_SoundNumber,
+	NotFound_SoundIndex,
+
+	Invalid_SNDExtension,
+	Invalid_LoadSNDPath,
+	Invalid_SNDSearchPath,
+	Invalid_EmptySNDFilePath,
+	Invalid_SNDFileSize,
+	Invalid_SNDSignature,
+	Invalid_RIFFSignature,
+	Invalid_WAVEFormat,
+	Invalid_SAELibFolderPath,
+
+	Failed_OpenSNDFile,
+	Failed_CreateSAELibFolder,
+	Failed_CreateErrorLogFile,
+	Failed_WriteErrorLogFile,
+	Failed_CloseErrorLogFile,
+	Failed_CreateExportWAVFolder,
+	Failed_CreateWAVFile,
+	Failed_WriteWAVFile,
+	Failed_CloseWAVFile,
+
+	Corrupted_SNDFile,
+	Warning_DuplicateSoundNumber,
+};
+```
+
+### エラー情報配列
+このライブラリが出力するエラー情報の配列です  
+```
+struct T_ErrorInfo {
+public:
+	const int32_t ID;
+	const char* const Name;
+	const char* const Message;
+};
+      
+constexpr T_ErrorInfo ErrorInfo[] = {
+	{ NotFound_SNDFile,				"NotFound_SNDFile",				"SNDファイルが見つかりません" },
+	{ NotFound_SoundNumber,			"NotFound_SoundNumber",			"指定した番号がスプライトリストから見つかりません" },
+	{ NotFound_SoundIndex,			"NotFound_SoundIndex",			"指定したインデックスがスプライトリストから見つかりません" },
+			
+	{ Invalid_SNDExtension,			"Invalid_SNDExtension",			"ファイルの拡張子が.sndではありません" },
+	{ Invalid_LoadSNDPath,			"Invalid_LoadSNDPath",			"SNDファイル読み込み関数のパスが正しくありません" },
+	{ Invalid_SNDSearchPath,		"Invalid_SNDSearchPath",		"SNDファイル検索フォルダのパスが正しくありません" },
+	{ Invalid_EmptySNDFilePath,		"Invalid_EmptySNDFilePath",		"SNDファイルパスが指定されていません" },
+	{ Invalid_SNDFileSize,			"Invalid_SNDFileSize",			"SNDファイルサイズが許容値を超えています" },
+	{ Invalid_SNDSignature,			"Invalid_SNDSignature",			"ファイルの内部形式がSNDファイルではありません" },
+	{ Invalid_RIFFSignature,		"Invalid_RIFFSignature",		"SNDファイル内の音声データがRIFF形式ではありません" },
+	{ Invalid_WAVEFormat,			"Invalid_WAVEFormat",			"SNDファイル内の音声データのフォーマットがWAVE形式ではありません" },
+	{ Invalid_SAELibFolderPath,		"Invalid_SAELibFolderPath",		"SAELibフォルダのパスが正しくありません" },
+			
+	{ Failed_OpenSNDFile,			"Failed_OpenSNDFile",			"SNDファイルが開けませんでした" },
+	{ Failed_CreateSAELibFolder,	"Failed_CreateSAELibFolder",	"SAELibフォルダの作成に失敗しました" },
+	{ Failed_CreateErrorLogFile,	"Failed_CreateErrorLogFile",	"エラーログファイルの作成に失敗しました" },
+	{ Failed_WriteErrorLogFile,		"Failed_WriteErrorLogFile",		"エラーログファイルへの書き込みに失敗しました" },
+	{ Failed_CloseErrorLogFile,		"Failed_CloseErrorLogFile",		"エラーログファイルへの書き込みが正常に終了しませんでした" },
+	{ Failed_CreateExportWAVFolder,	"Failed_CreateExportWAVFolder",	"WAVファイル出力フォルダの作成に失敗しました" },
+	{ Failed_CreateWAVFile,			"Failed_CreateWAVFile",			"WAVファイルの作成に失敗しました" },
+	{ Failed_WriteWAVFile,			"Failed_WriteWAVFile",			"WAVファイルの書き込みに失敗しました" },
+	{ Failed_CloseWAVFile,			"Failed_CloseWAVFile",			"WAVファイルの書き込みが正常に終了しませんでした" },
+			
+	{ Corrupted_SNDFile,			"Corrupted_SNDFile",			"SNDファイルが壊れている可能性があります" },
+	{ Warning_DuplicateSoundNumber,	"Warning_DuplicateSoundNumber",	"スプライトリストの番号が重複しています" },
+};
+
+```
+
+### エラー情報のサイズ取得
+エラー情報の配列サイズを取得します　　
+```
+SAELib::SNDError::ErrorInfoSize; // エラー情報配列サイズ
+```
+戻り値 size_t ErrorInfoSize エラー情報配列サイズ
+
+### エラー名取得
+エラーIDに応じたエラー名を取得します  
+```
+SAELib::SNDError::ErrorName(ErrorID); // ErrorIDのエラー名を取得
+```
+引数1 int32_t ErrorID エラーID  
+戻り値 const char* ErrorName エラー名  
+
+### エラーメッセージ取得
+エラーIDに応じたエラーメッセージを取得します  
+```
+SAELib::SNDError::ErrorMessage(ErrorID); // ErrorIDのエラーメッセージを取得
+```
+引数1 int32_t ErrorID エラーID  
+戻り値 const char* ErrorMessage エラーメッセージ  
 
 ## 使用例
 ```
