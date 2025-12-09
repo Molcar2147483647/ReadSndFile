@@ -86,37 +86,37 @@ snd.GetSoundDataIndex(0); // 0番目のデータを取得
 ### SNDデータのサウンドグループ数を取得
 読み込んだSNDデータのサウンドグループ数を返します  
 ```
-air.NumGroup(); // サウンドグループ数を取得
+snd.NumGroup(); // サウンドグループ数を取得
 ```
 戻り値 int32_t NumGroup サウンドグループ数  
 
 ### SNDデータのサウンド数を取得
 読み込んだSNDデータのサウンド数を返します  
 ```
-air.NumItem(); // サウンド数を取得
+snd.NumItem(); // サウンド数を取得
 ```
 戻り値 int32_t NumItem サウンド数  
 
 ### SNDデータのファイル名を取得
 読み込んだSNDデータの拡張子を除いたファイル名を返します  
 ```
-air.FileName(); // ファイル名を取得
+snd.FileName(); // ファイル名を取得
 ```
 戻り値 const std::string& FileName ファイル名  
 
 ### SNDデータの初期化
 読み込んだSNDデータを初期化します  
 ```
-air.clear(); // SNDデータの初期化
+snd.clear(); // SNDデータの初期化
 ```
 戻り値 なし(void)  
 
 ### SNDデータの存在確認
 読み込んだSNDデータの空かを判定します  
 ```
-air.empty(); // SNDデータの存在確認
+snd.empty(); // SNDデータの存在確認
 ```
-戻り値 bool 判定結果 (false = データが空：true = データが存在)  
+戻り値 bool 判定結果 (false = データが存在：true = データが空)  
 
 ### SNDデータのデータサイズを取得
 読み込んだSNDデータのデータサイズを返します  
@@ -317,8 +317,8 @@ public:
       
 constexpr T_ErrorInfo ErrorInfo[] = {
 	{ NotFound_SNDFile,				"NotFound_SNDFile",				"SNDファイルが見つかりません" },
-	{ NotFound_SoundNumber,			"NotFound_SoundNumber",			"指定した番号がスプライトリストから見つかりません" },
-	{ NotFound_SoundIndex,			"NotFound_SoundIndex",			"指定したインデックスがスプライトリストから見つかりません" },
+	{ NotFound_SoundNumber,			"NotFound_SoundNumber",			"指定した番号がサウンドリストから見つかりません" },
+	{ NotFound_SoundIndex,			"NotFound_SoundIndex",			"指定したインデックスがサウンドリストから見つかりません" },
 			
 	{ Invalid_SNDExtension,			"Invalid_SNDExtension",			"ファイルの拡張子が.sndではありません" },
 	{ Invalid_LoadSNDPath,			"Invalid_LoadSNDPath",			"SNDファイル読み込み関数のパスが正しくありません" },
@@ -341,13 +341,13 @@ constexpr T_ErrorInfo ErrorInfo[] = {
 	{ Failed_CloseWAVFile,			"Failed_CloseWAVFile",			"WAVファイルの書き込みが正常に終了しませんでした" },
 			
 	{ Corrupted_SNDFile,			"Corrupted_SNDFile",			"SNDファイルが壊れている可能性があります" },
-	{ Warning_DuplicateSoundNumber,	"Warning_DuplicateSoundNumber",	"スプライトリストの番号が重複しています" },
+	{ Warning_DuplicateSoundNumber,	"Warning_DuplicateSoundNumber",	"サウンドリストの番号が重複しています" },
 };
 
 ```
 
 ### エラー情報のサイズ取得
-エラー情報の配列サイズを取得します　　
+エラー情報の配列サイズを取得します  
 ```
 SAELib::SNDError::ErrorInfoSize; // エラー情報配列サイズ
 ```
