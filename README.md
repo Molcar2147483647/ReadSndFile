@@ -48,25 +48,27 @@ snd.LoadSND("kfm.snd", "C:/MugenData"); // 指定パスから検索
 ### 指定番号の存在確認
 読み込んだSNDデータを検索し、指定番号が存在するかを確認します  
 ```
-snd.ExistAnimNumber(5150); // アニメ番号5150が存在するか確認
+snd.ExistSoundNumber(5, 0); // サウンド番号5-0が存在するか確認
 ```
-引数1 int32_t AnimNumber アニメ番号  
+引数1 int32_t GroupNo グループ番号  
+引数2 int32_t ItemNo アイテム番号  
 戻り値 bool 検索結果 (false = 存在なし : true = 存在あり)
 
 ### 指定番号のデータへのアクセス
-指定したアニメ番号のSNDデータへアクセスします  
+指定したサウンド番号のSNDデータへアクセスします  
 対象が存在しない場合はSNDConfig::SetThrowErrorの設定に準拠します  
 ```
-snd.GetAnimData(5150); // アニメ番号5150のデータを取得
+snd.GetSoundData(5, 0); // サウンド番号5-0のデータを取得
 ```
-引数1 int32_t AnimNumber アニメ番号  
-戻り値1 対象が存在する GetAnimData(AnimNumber)のデータ  
+引数1 int32_t GroupNo グループ番号  
+引数2 int32_t ItemNo アイテム番号  
+戻り値1 対象が存在する GetSoundData(GroupNo, ItemNo)のデータ  
 戻り値2 対象が存在しない SNDConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
 ### 指定インデックスデータの存在確認
 読み込んだSNDデータを検索し、指定インデックスのデータ存在するかを確認します  
 ```
-snd.ExistAnimDataIndex(0); // 0番目のデータが存在するか確認
+snd.ExistSoundDataIndex(0); // 0番目のデータが存在するか確認
 ```
 引数1 int32_t index データ配列インデックス  
 戻り値 bool 検索結果 (false = 存在なし : true = 存在あり)
@@ -75,10 +77,10 @@ snd.ExistAnimDataIndex(0); // 0番目のデータが存在するか確認
 SNDデータへ指定したインデックスでアクセスします  
 対象が存在しない場合はSNDConfig::SetThrowErrorの設定に準拠します  
 ```
-snd.GetAnimDataIndex(0); // 0番目のデータを取得
+snd.GetSoundDataIndex(0); // 0番目のデータを取得
 ```
 引数1 int32_t index データ配列インデックス  
-戻り値1 対象が存在する GetAnimDataIndex(index)のデータ  
+戻り値1 対象が存在する GetSoundDataIndex(index)のデータ  
 戻り値2 対象が存在しない SNDConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
 
