@@ -880,7 +880,7 @@ namespace SAELib {
 
 				// サウンドデータ重複チェック
 				for (SoundListIndex = 0; SoundListIndex < SNDBinaryData.NumSound(); ++SoundListIndex) {
-					// 既存の画像データの場合はインデックスを指定
+					// 既存のサウンドデータの場合はインデックスを指定
 					if (SNDBinaryData.SoundSize(SoundListIndex) == WAVEBinary.size() && !std::memcmp(SNDBinaryData.Sound(SoundListIndex), WAVEBinary.data(), WAVEBinary.size())) {
 						FoundSoundData = true;
 						break;
