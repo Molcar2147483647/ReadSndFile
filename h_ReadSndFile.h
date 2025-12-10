@@ -1118,11 +1118,11 @@ namespace SAELib {
 			int32_t NumGroup() const noexcept { return NumGroup_; }
 
 			/**
-			* @brief SNDデータのサウンド数を取得
+			* @brief SNDデータのサウンドデータ数を取得
 			*
-			* 　読み込んだSNDデータのサウンド数を返します
+			* 　読み込んだSNDデータの全サウンドデータ（アイテム）数を返します
 			*
-			* @return int32_t NumItem サウンド数
+			* @return int32_t NumItem サウンドデータ数
 			*/
 			int32_t NumItem() const noexcept { return NumItem_; }
 
