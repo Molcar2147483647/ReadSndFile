@@ -3,7 +3,7 @@
 
 #include <stdint.h>			// uint32_t‚Æ‚©‚Ì‚â‚Â
 #include <string>			// stringŒn‚Ì‚â‚Â
-#include <cstring>			// std::memcmp‚Ì‚â‚Â‚Ì‚â‚Â
+#include <cstring>			// std::memcmp‚Ì‚â‚Â
 #include <string_view>		// std::string_view‚Ì‚â‚Â
 #include <stdexcept>		// runtime_error‚Ì‚â‚Â
 #include <fstream>			// ƒtƒ@ƒCƒ‹“Ç‚ÝŽæ‚è
