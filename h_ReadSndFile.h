@@ -2,8 +2,13 @@
 #define INCLUDEGUARD_READSNDFILE_HEADER
 
 #include <stdint.h>			// uint32_tとかのやつ
+#include <string>			// string系のやつ
+#include <cstring>			// std::memcmpのやつのやつ
+#include <string_view>		// std::string_viewのやつ
+#include <stdexcept>		// runtime_errorのやつ
 #include <fstream>			// ファイル読み取り
 #include <filesystem>		// ファイル検索
+#include <system_error>		// std::error_codeのやつ
 #include <vector>			// 可変長配列
 #include <unordered_map>	// ハッシュ的なやつ
 #include <type_traits>		// std::enable_ifのやつ
@@ -1220,9 +1225,9 @@ namespace SAELib {
 			* @retval 対象が存在する SoundData
 			* @retval 対象が存在しない SNDConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)
 			*/
-			const SoundData GetSoundData(int32_t GroupNo, int32_t ItemNo) {
-				if (int32_t SoundNumber = SoundNumberUMap.find(GroupNo, ItemNo); SoundNumber >= 0) { // SoundExist(GroupNo, SoundNo)と同義
-					return SoundData(&SNDBinaryData, SoundNumber);
+			SoundData GetSoundData(int32_t GroupNo, int32_t ItemNo) {
+				if (ExistSoundNumber(GroupNo, ItemNo)) {
+					return SoundData(&SNDBinaryData, SoundNumberUMap.find(GroupNo, ItemNo));
 				}
 				if (!T_Config::Instance().ThrowError()) {
 					return SoundData(&SNDBinaryData, KSIZE_MAX);
@@ -1253,7 +1258,7 @@ namespace SAELib {
 			* @retval 対象が存在する SoundData
 			* @retval 対象が存在しない SNDConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)
 			*/
-			const SoundData GetSoundDataIndex(int32_t index) const {
+			SoundData GetSoundDataIndex(int32_t index) const {
 				if (ExistSoundDataIndex(index)) {
 					return SoundData(&SNDBinaryData, index);
 				}
