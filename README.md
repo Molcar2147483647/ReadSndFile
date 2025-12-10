@@ -91,7 +91,7 @@ snd.NumGroup(); // サウンドグループ数を取得
 戻り値 int32_t NumGroup サウンドグループ数  
 
 ### SNDデータのサウンド数を取得
-読み込んだSNDデータのサウンド数を返します  
+読み込んだSNDデータの全サウンドデータ（アイテム）数を返します  
 ```
 snd.NumItem(); // サウンド数を取得
 ```
@@ -377,7 +377,7 @@ SAELib::SNDError::ErrorMessage(ErrorID); // ErrorIDのエラーメッセージ�
 int main()
 {
 	SAELib::SNDConfig::SetThrowError(false);		// このライブラリで発生したエラーを例外として処理しない
-	SAELib::SNDConfig::SetCreateSAELibFile(false);	// SAELibファイルの作成を許可する
+	SAELib::SNDConfig::SetCreateSAELibFile(false);	// SAELibファイルの作成を許可しない
 	SAELib::SNDConfig::SetSAELibFilePath();			// SAELibファイルの作成階層を指定
 	SAELib::SNDConfig::SetCreateLogFile(false);		// このライブラリで発生したエラーログの作成を許可する
 	SAELib::SNDConfig::SetSNDSearchPath("../../");	// sndファイルの検索開始階層を指定
