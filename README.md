@@ -406,7 +406,7 @@ int main()
 		std::cout << "Comment: " << snd.GetSoundDataIndex(SoundIndex).Comment() << std::endl;
 	}
 
-	// 存在しない番号はダミーデータに
+	// 存在しない番号はダミーデータ判定
 	std::cout << snd.GetSoundData(-999, -999).IsDummy() << std::endl;
 
 	return 0;
